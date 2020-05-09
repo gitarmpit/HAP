@@ -1,0 +1,84 @@
+Start pairing
+encoder: added type=6, len=1 val=1
+encoder: added type=0, len=1 val=0
+==  msg from srv  ===============
+parse type: 6, len=1, stage: 2
+parse type: 2, len=16, stage: 2
+parse type: 3, len=255, stage: 2
+parse type: 3, len=129, stage: 2
+
+M2: acc pk size:384
+encoder: added type=6, len=1 val=3
+encoder: added type=3, len=255
+encoder: added type=3, len=129
+encoder: added type=4, len=64
+==  msg from srv  ===============
+received from server: 172
+parse type: 6, len=1, stage: 4
+parse type: 4, len=64, stage: 4
+encoder: added type=1, len=36
+encoder: added type=3, len=32
+encoder: added type=10, len=64
+encoder: added type=5, len=154
+encoder: added type=6, len=1 val=5
+==  msg from srv  ===============
+received from server: 244
+parse type: 6, len=1, stage: 6
+parse type: 5, len=135, stage: 6
+parse type: 1, len=17, stage: 0
+parse type: 3, len=32, stage: 0
+parse type: 10, len=64, stage: 0
+Acc pairing ID: 5f:23:45:67:89:02
+Acc LPTK: 50800926979663088354671403557872387264250469005851133548636894099613091395563
+Pairing complete, start verification
+encoder: added type=6, len=1 val=1
+encoder: added type=3, len=32
+==  msg from srv  ===============
+received from server: 244
+parse type: 6, len=1, stage: 2
+parse type: 5, len=101, stage: 2
+parse type: 3, len=32, stage: 2
+parse type: 1, len=17, stage: 0
+parse type: 10, len=64, stage: 0
+Completed pair verification
+encoder: added type=1, len=36
+encoder: added type=10, len=64
+verify M3: encrypted data length: 120
+encoder: added type=6, len=1 val=3
+encoder: added type=5, len=120
+==  msg from srv  ===============
+received from server: 105
+parse type: 6, len=1, stage: 4
+verification complete!
+session encrypt: processing chunk len = 64
+==  msg from srv  ===============
+session decrypt: processing chunk len = 985
+HTTP/1.1 200 OK
+Content-type: application/hap+json
+Content-Length: 885
+Connection: keep-alive
+
+{"accessories":[{"aid":1,"services":[{"iid":1,"type":"3E","characteristics":[{"iid":2,"type":"23","perms":["pr"],"format":"string","description":"Name","value":"Thermometer"},{"iid":3,"type":"20","perms":["pr"],"format":"string","description":"Manufacturer","value":"none"},{"iid":4,"type":"21","perms":["pr"],"format":"string","description":"Model","value":"none"},{"iid":5,"type":"30","perms":["pr"],"format":"string","description":"Serial number","value":"none"},{"iid":6,"type":"14","perms":["pw"],"format":"bool","description":"Identify"}]},{"iid":7,"type":"8A","characteristics":[{"iid":8,"type":"23","perms":["pr"],"format":"string","description":"Name","value":"Thermometer"},{"iid":9,"type":"11","perms":["pr","ev"],"format":"float","description":"Temp in C","value":22.3},{"iid":10,"type":"75","perms":["pr","ev"],"format":"bool","description":"Is Active","value":true}]}]}]}
+Temp sensor service: 1.7
+Current temp characterstic: 1.9
+session encrypt: processing chunk len = 72
+==  msg from srv  ===============
+session decrypt: processing chunk len = 151
+22.7
+session encrypt: processing chunk len = 72
+==  msg from srv  ===============
+session decrypt: processing chunk len = 151
+22.7
+session encrypt: processing chunk len = 72
+==  msg from srv  ===============
+session decrypt: processing chunk len = 151
+22.7
+session encrypt: processing chunk len = 72
+==  msg from srv  ===============
+session decrypt: processing chunk len = 151
+22.7
+session encrypt: processing chunk len = 72
+==  msg from srv  ===============
+session decrypt: processing chunk len = 151
+22.7
+Terminate batch job (Y/N)? 

@@ -1,0 +1,217 @@
+private key len: 32
+The PIN for pairing is 111-11-111
+New connection from: 127.0.0.1
+==  incoming req  ===============
+
+Content length: 6
+
+POST /pair-setup HTTP/1.1
+Host: Thermometer._hap._tcp.local
+Content-Length: 6
+Content-Type: application/pairing+tlv8
+
+
+uri: /pair-setup
+parse type: 6, len=1, stage: 1
+parse type: 0, len=1, stage: 1
+invoking setup M2
+pair1: acc SRP salt len=16, acc SRP public key B len: 384
+encoder: added type=6, len=1 val=2
+encoder: added type=2, len=16
+encoder: added type=3, len=255
+encoder: added type=3, len=129
+=== Reply ====
+
+Plaintext reply: 513 bytes
+
+HTTP/1.1 200 OK
+Content-type: application/pairing+tlv8
+Content-Length: 409
+Connection: keep-alive
+
+
+
+==  incoming req  ===============
+
+Content length: 457
+
+POST /pair-setup HTTP/1.1
+Host: Thermometer._hap._tcp.local
+Content-Length: 457
+Content-Type: application/pairing+tlv8
+
+
+uri: /pair-setup
+parse type: 6, len=1, stage: 3
+parse type: 3, len=255, stage: 3
+parse type: 3, len=129, stage: 3
+parse type: 4, len=64, stage: 3
+invoking setup M4: t3 len=384, t4 len=64
+pair2 output: acc SRP proof len=64
+step2 complete
+encoder: added type=6, len=1 val=4
+encoder: added type=4, len=64
+=== Reply ====
+
+Plaintext reply: 172 bytes
+
+HTTP/1.1 200 OK
+Content-type: application/pairing+tlv8
+Content-Length: 69
+Connection: keep-alive
+
+
+
+==  incoming req  ===============
+
+Content length: 159
+
+POST /pair-setup HTTP/1.1
+Host: Thermometer._hap._tcp.local
+Content-Length: 159
+Content-Type: application/pairing+tlv8
+
+
+uri: /pair-setup
+parse type: 5, len=154, stage: 0
+parse type: 6, len=1, stage: 5
+invoking setup M6, t5 len=154 
+parse type: 1, len=36, stage: 0
+parse type: 3, len=32, stage: 0
+parse type: 10, len=64, stage: 0
+Pairing already exists for: EC42D9A0-C0F8-4E36-A548-901DB31F29A8
+paired, set discoverable to false
+pair3: acc_ltpk len=32, acc_proof len: 64
+encoder: added type=1, len=17
+encoder: added type=3, len=32
+encoder: added type=10, len=64
+pair3: encrypted data length: 135
+encoder: added type=6, len=1 val=6
+encoder: added type=5, len=135
+=== Reply ====
+
+Plaintext reply: 244 bytes
+
+HTTP/1.1 200 OK
+Content-type: application/pairing+tlv8
+Content-Length: 140
+Connection: keep-alive
+
+
+
+Session ended
+New connection from: 127.0.0.1
+==  incoming req  ===============
+
+Content length: 37
+
+POST /pair-verify HTTP/1.1
+Host: Thermometer._hap._tcp.local
+Content-Length: 37
+Content-Type: application/pairing+tlv8
+
+
+uri: /pair-verify
+parse type: 6, len=1, stage: 1
+parse type: 3, len=32, stage: 1
+invoking verify M2, t3 len=32 
+verify1: acc proof length: 64
+encoder: added type=1, len=17
+encoder: added type=10, len=64
+verify1: encrypted data length: 101
+encoder: added type=6, len=1 val=2
+encoder: added type=5, len=101
+encoder: added type=3, len=32
+=== Reply ====
+
+Plaintext reply: 244 bytes
+
+HTTP/1.1 200 OK
+Content-type: application/pairing+tlv8
+Content-Length: 140
+Connection: keep-alive
+
+
+
+==  incoming req  ===============
+
+Content length: 125
+
+POST /pair-verify HTTP/1.1
+Host: Thermometer._hap._tcp.local
+Content-Length: 125
+Content-Type: application/pairing+tlv8
+
+
+uri: /pair-verify
+parse type: 6, len=1, stage: 3
+parse type: 5, len=120, stage: 3
+invoking verify M4, t5 len=120 
+parse type: 1, len=36, stage: 0
+parse type: 10, len=64, stage: 0
+Completed pair verification for Thermometer
+encoder: added type=6, len=1 val=4
+=== Reply ====
+
+Plaintext reply: 105 bytes
+
+HTTP/1.1 200 OK
+Content-type: application/pairing+tlv8
+Content-Length: 3
+Connection: keep-alive
+
+
+
+==  incoming req  ===============
+session decrypt: processing chunk len = 64
+
+Content length: 0
+
+GET /accessories HTTP/1.1
+Host: Thermometer._hap._tcp.local
+
+
+uri: /accessories
+accessory request
+=== Reply ====
+
+Plaintext reply: 985 bytes
+
+HTTP/1.1 200 OK
+Content-type: application/hap+json
+Content-Length: 885
+Connection: keep-alive
+
+
+
+session encrypt: processing chunk len = 985
+
+Encrypted reply: 1003 bytes
+
+==  incoming req  ===============
+session decrypt: processing chunk len = 72
+
+Content length: 0
+
+GET /characteristics?id=1.9HTTP/1.1
+Host: Thermometer._hap._tcp.local
+
+uri: /characteristics?id=1.9HTTP/1.1
+Host:
+characteristics get
+=== Reply ====
+
+Plaintext reply: 151 bytes
+
+HTTP/1.1 200 OK
+Content-type: application/hap+json
+Content-Length: 52
+Connection: keep-alive
+
+
+
+session encrypt: processing chunk len = 151
+
+Encrypted reply: 169 bytes
+
+Terminate batch job (Y/N)? 
