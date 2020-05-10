@@ -24,7 +24,7 @@ public class Thermometer implements Accessory
     @Override
     public String processEvent(String in)
     {
-        tempC += 1.;
+        tempC += 0.1;
         return "{\"characteristics\":[{\"value\":" + tempC + ",\"aid\":1,\"iid\":9}]}";
     }
 

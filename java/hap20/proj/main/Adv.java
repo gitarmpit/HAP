@@ -18,7 +18,7 @@ public class Adv implements Runnable
 
     private boolean discoverable = true;
 
-    byte[] ip = { (byte) 192, (byte) 168, 1, (byte) 109 };
+    byte[] ip = { (byte) 192, (byte) 168, 0, (byte) 107 };
     int port = 9123;
 
     byte[] buf2 = null;
