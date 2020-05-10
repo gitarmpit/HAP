@@ -1,3 +1,3 @@
 set PATH=c:\cygwin64\bin
 
-gcc *.cpp -o mdns.exe                                           
+gcc mdns2.c -o mdns.exe                                           
