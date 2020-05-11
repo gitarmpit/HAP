@@ -1,0 +1,7 @@
+POST /pair-verify HTTP/1.1
+Host: Test\032Bridge._hap._tcp.local
+Content-Length: 37
+Content-Type: application/pairing+tlv8
+
+ S÷ğT×Hm
+:šË½yóÓ“\Ş£Ò›â‰hø1[
