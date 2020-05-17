@@ -1,0 +1,108 @@
+@echo off 
+
+SET BASE=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community
+SET VS14=%BASE%\VC\Tools\MSVC\14.21.27702
+
+SET INCLUDE=%VS14%\ATLMFC\include;%VS14%\include;^
+C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um;^
+C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt;^
+C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared;^
+C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um;^
+C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt;^
+C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt
+
+SET LIB=%VS14%\ATLMFC\lib\x64;%VS14%\lib\x64;^
+C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\lib\um\x64;^
+C:\Program Files (x86)\Windows Kits\10\lib\10.0.17763.0\ucrt\x64;^
+C:\Program Files (x86)\Windows Kits\10\lib\10.0.17763.0\um\x64;
+
+SET LIBPATH=%VS14%\ATLMFC\lib\x64;%VS14%\lib\x64;%VS14%\lib\x86\store\references;^
+C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17763.0;^
+C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0;^
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319;
+
+SET Path=%VS14%\bin\HostX64\x64;%BASE%\Common7\IDE\VC\VCPackages;^
+%BASE%\Common7\IDE\CommonExtensions\Microsoft\TestWindow;^
+%BASE%\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer;^
+%BASE%\MSBuild\Current\bin\Roslyn;^
+%BASE%\Team Tools\Performance Tools\x64;%BASE%\Team Tools\Performance Tools;^
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Common\VSPerfCollectionTools\vs2019\\x64;^
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Common\VSPerfCollectionTools\vs2019\;^
+C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64\;^
+C:\Program Files (x86)\HTML Help Workshop;^
+%BASE%\Common7\IDE\CommonExtensions\Microsoft\FSharp\;^
+C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64;^
+C:\Program Files (x86)\Windows Kits\10\bin\x64;^
+%BASE%\\MSBuild\Current\Bin;C:\Windows\Microsoft.NET\Framework64\v4.0.30319;^
+%BASE%\Common7\IDE\;%BASE%\Common7\Tools\;^
+C:\Program Files (x86)\Common Files\Oracle\Java\javapath;^
+C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;^
+C:\WINDOWS\System32\WindowsPowerShell\v1.0\;^
+C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;^
+C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;^
+C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;^
+C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\WINDOWS\System32\OpenSSH\;^
+C:\Program Files (x86)\Prince\engine\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\CMake\bin;^
+C:\Program Files (x86)\GitExtensions\;C:\Program Files (x86)\Calibre2\;^
+C:\texlive\2019\bin\win32;C:\Users\admin\AppData\Local\Microsoft\WindowsApps;^
+C:\Users\admin\AppData\Local\Programs\MiKTeX 2.9\miktex\bin\x64\;^
+C:\Users\admin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\admin\AppData\Local\Pandoc\;^
+%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\admin\.dotnet\tools;^
+%BASE%\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;^
+%BASE%\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja
+
+::==================
+:: /TP  treat all files as CPP
+:: /JMC -- just my code debugging, skips system calls 
+:: /permissive-   standard conforming behavior
+:: /GS buffer security check
+:: /analyze-   disable code analysys
+:: /W3 warning level=production quality
+:: /Zc:wchar_t  wchar is a native type
+:: /ZI  -- but it produces a PDB file in a format that supports the Edit and Continue feature
+:: /Gm-  disable minimal rebuild 
+:: /Od -- Turns off all optimizations in the program and speeds compilation. 
+:: /sdl-  additional security checks (on top of /GS)
+:: /Zc:inline (remove unreferenced COMDAT, size reduction and build speedup) 
+:: /fp:precise floating point behavior
+:: /WX-  treat warnings as errors
+:: /Zc:forScope  let a for loop's initializer go out of scope after the for loop.
+:: /RTC1  runtime checks  (debug only) 
+:: /Gd  -- calling convention _cdecl which is the default 
+:: /Oy-  suppress frame pointer omission (debug is /Oy- which means do not suppress) 
+:: /FC   -- full path of the source code in debug version diagnostics
+:: /EHsc  -- exception handling model s: enables standard stack unwinding,  c: assumes extern "C" never throws C++ ex
+:: /Fp"Debug\MyDll.pch"   path for precompiled header
+
+:: Release: 
+:: /GL  whole program optimization
+:: /Gy function level linking
+:: /Oi  generate intrinsic function
+:: /Oy frame pointer omission
+
+:: RT lib version:  /MD /MDd, static: /MT /MTd, /LD: dll   
+
+:: Macro
+:: NDEBUG : disables assert: #define assert(ignore) ((void)0) 
+
+SET DEFS=/D _UNICODE /D UNICODE /D _WINDOWS
+SET OPTS=/EHsc /fp:precise /Gm- /GS /nologo /permissive- /Zc:forScope /Zc:inline /Zc:wchar_t /W3 /WX- 
+
+::debug
+SET DEFS_DEBUG=%DEFS%  /D _DEBUG    
+SET DEFS_RELEASE=%DEFS%  /D NDEBUG
+
+:: debug 
+SET OPTS_DEBUG=%OPTS% /MDd /Od /RTC1 /sdl /Zi 
+:: release
+SET OPTS_RELEASE=%OPTS% /GL /Gy /O2 /Oi /MD /sdl- /Zi 
+
+set LINK_FLAGS=/INCREMENTAL:NO /NOLOGO /MANIFEST /MANIFESTUAC:NO^
+ /manifest:embed /MACHINE:X64 /DYNAMICBASE /NXCOMPAT /SUBSYSTEM:CONSOLE
+::/SUBSYSTEM:WINDOWS
+
+set LINK_FLAGS_DEBUG=%LINK_FLAGS% /DEBUG:FULL
+set LINK_FLAGS_RELEASE=%LINK_FLAGS%
+
+
+

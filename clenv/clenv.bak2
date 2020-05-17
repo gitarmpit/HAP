@@ -1,0 +1,105 @@
+@echo off 
+
+SET INCLUDE=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\ATLMFC\include;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\include;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um;C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt;C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared;C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um;C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt;C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt
+SET LIB=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\ATLMFC\lib\x64;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\lib\x64;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\lib\um\x64;C:\Program Files (x86)\Windows Kits\10\lib\10.0.17763.0\ucrt\x64;C:\Program Files (x86)\Windows Kits\10\lib\10.0.17763.0\um\x64;
+SET LIBPATH=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\ATLMFC\lib\x64;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\lib\x64;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\lib\x86\store\references;C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17763.0;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0;C:\Windows\Microsoft.NET\Framework64\v4.0.30319;
+SET Path=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\bin\HostX64\x64;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\VC\VCPackages;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\bin\Roslyn;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Team Tools\Performance Tools\x64;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Team Tools\Performance Tools;C:\Program Files (x86)\Microsoft Visual Studio\Shared\Common\VSPerfCollectionTools\vs2019\\x64;C:\Program Files (x86)\Microsoft Visual Studio\Shared\Common\VSPerfCollectionTools\vs2019\;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64\;C:\Program Files (x86)\HTML Help Workshop;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\FSharp\;C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64;C:\Program Files (x86)\Windows Kits\10\bin\x64;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\\MSBuild\Current\Bin;C:\Windows\Microsoft.NET\Framework64\v4.0.30319;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Prince\engine\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\CMake\bin;C:\Program Files (x86)\GitExtensions\;C:\Program Files (x86)\Calibre2\;C:\texlive\2019\bin\win32;C:\Users\admin\AppData\Local\Microsoft\WindowsApps;C:\Users\admin\AppData\Local\Programs\MiKTeX 2.9\miktex\bin\x64\;C:\Users\admin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\admin\AppData\Local\Pandoc\;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\admin\.dotnet\tools;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja
+SET PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+SET Platform=x64
+SET PROCESSOR_ARCHITECTURE=AMD64
+SET PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 17 Stepping 0, AuthenticAMD
+SET PROCESSOR_LEVEL=23
+SET PROCESSOR_REVISION=1100
+SET ProgramData=C:\ProgramData
+SET ProgramFiles=C:\Program Files
+SET ProgramFiles(x86)=C:\Program Files (x86)
+SET ProgramW6432=C:\Program Files
+SET PROMPT=$P$G
+SET PSModulePath=C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+SET PUBLIC=C:\Users\Public
+SET SESSIONNAME=Console
+SET SystemDrive=C:
+SET SystemRoot=C:\WINDOWS
+SET TEMP=C:\Users\admin\AppData\Local\Temp
+SET TMP=C:\Users\admin\AppData\Local\Temp
+SET UCRTVersion=10.0.17763.0
+SET UniversalCRTSdkDir=C:\Program Files (x86)\Windows Kits\10\
+SET USERDOMAIN=VOLO
+SET USERDOMAIN_ROAMINGPROFILE=VOLO
+SET USERNAME=admin
+SET USERPROFILE=C:\Users\admin
+SET VCIDEInstallDir=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\VC\
+SET VCINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\
+SET VCToolsInstallDir=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\
+SET VCToolsRedistDir=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Redist\MSVC\14.21.27702\
+SET VCToolsVersion=14.21.27702
+SET VisualStudioVersion=16.0
+SET VS160COMNTOOLS=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\
+SET VSCMD_ARG_app_plat=Desktop
+SET VSCMD_ARG_HOST_ARCH=x64
+SET VSCMD_ARG_TGT_ARCH=x64
+SET VSCMD_VER=16.1.3
+SET VSINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\
+SET windir=C:\WINDOWS
+SET WindowsLibPath=C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17763.0;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0
+SET WindowsSdkBinPath=C:\Program Files (x86)\Windows Kits\10\bin\
+SET WindowsSdkDir=C:\Program Files (x86)\Windows Kits\10\
+SET WindowsSDKLibVersion=10.0.17763.0\
+SET WindowsSdkVerBinPath=C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\
+SET WindowsSDKVersion=10.0.17763.0\
+
+::==================
+:: /TP  treat all files as CPP
+:: /JMC -- just my code debugging, skips system calls 
+:: /permissive-   standard conforming behavior
+:: /GS buffer security check
+:: /analyze-   disable code analysys
+:: /W3 warning level=production quality
+:: /Zc:wchar_t  wchar is a native type
+:: /ZI  -- but it produces a PDB file in a format that supports the Edit and Continue feature
+:: /Gm-  disable minimal rebuild 
+:: /Od -- Turns off all optimizations in the program and speeds compilation. 
+:: /sdl-  additional security checks (on top of /GS)
+:: /Zc:inline (remove unreferenced COMDAT, size reduction and build speedup) 
+:: /fp:precise floating point behavior
+:: /WX-  treat warnings as errors
+:: /Zc:forScope  let a for loop's initializer go out of scope after the for loop.
+:: /RTC1  runtime checks  (debug only) 
+:: /Gd  -- calling convention _cdecl which is the default 
+:: /Oy-  suppress frame pointer omission (debug is /Oy- which means do not suppress) 
+:: /FC   -- full path of the source code in debug version diagnostics
+:: /EHsc  -- exception handling model s: enables standard stack unwinding,  c: assumes extern "C" never throws C++ ex
+:: /Fp"Debug\MyDll.pch"   path for precompiled header
+
+:: Release: 
+:: /GL  whole program optimization
+:: /Gy function level linking
+:: /Oi  generate intrinsic function
+:: /Oy frame pointer omission
+
+:: RT lib version:  /MD /MDd, static: /MT /MTd, /LD: dll   
+
+:: Macro
+:: NDEBUG : disables assert: #define assert(ignore) ((void)0) 
+
+SET DEFS=/D _UNICODE /D UNICODE /D _WINDOWS
+SET OPTS=/EHsc /fp:precise /Gm- /GS /nologo /permissive- /Zc:forScope /Zc:inline /Zc:wchar_t /W3 /WX- 
+
+::debug
+SET DEFS_DEBUG=%DEFS%  /D _DEBUG    
+SET DEFS_RELEASE=%DEFS%  /D NDEBUG
+
+:: debug 
+SET OPTS_DEBUG=%OPTS% /MDd /Od /RTC1 /sdl /Zi 
+:: release
+SET OPTS_RELEASE=%OPTS% /GL /Gy /O2 /Oi /MD /sdl- /Zi 
+
+set LINK_FLAGS=/INCREMENTAL:NO /NOLOGO /MANIFEST /MANIFESTUAC:NO^
+ /manifest:embed /MACHINE:X64 /DYNAMICBASE /NXCOMPAT /SUBSYSTEM:CONSOLE
+::/SUBSYSTEM:WINDOWS
+
+set LINK_FLAGS_DEBUG=%LINK_FLAGS% /DEBUG:FULL
+set LINK_FLAGS_RELEASE=%LINK_FLAGS%
+
+
+
