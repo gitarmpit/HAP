@@ -162,7 +162,7 @@ HttpReply HttpSession::processPairRequest(const buf& body)
     {
         printf("invoking setup M2\n");
         // start M2
-        return PairSetup::step1();
+        return pairSetup.step1();
     }
     else if (stage == 3) // received M3
     {
@@ -170,7 +170,7 @@ HttpReply HttpSession::processPairRequest(const buf& body)
         buf t4 = d.getData(PROOF); // proof
         printf("invoking setup M4: t3 len=%d, t4 len=%d\n", t3.length, t4.length);
         // start M4
-        return PairSetup::step2(t3, t4);
+        return pairSetup.step2(t3, t4);
     }
     else if (stage == 5) // received M5
     {
@@ -186,7 +186,7 @@ HttpReply HttpSession::processPairRequest(const buf& body)
 
         // start M6
         pairingComplete = true;
-        return PairSetup::step3(message, authData);
+        return pairSetup.step3(message, authData);
     }
     else
     {

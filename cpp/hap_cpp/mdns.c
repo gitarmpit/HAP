@@ -13,7 +13,7 @@
 #define MDNS_PORT 5353
 #define MDNS_GROUP "224.0.0.251"
 
-uint8_t  header[] = { 0, 0, 0x84, 0, 0, 0, 0, 4, 0, 0, 0, 0 };
+static uint8_t  header[] = { 0, 0, 0x84, 0, 0, 0, 0, 4, 0, 0, 0, 0 };
 static const char* host_name = "volo.local";  //A
 static const char* hap = "_hap._tcp.local";
 static char full_service_name[64];
@@ -29,8 +29,8 @@ static int ttl = 30;  //sec
 
 #define BUFSIZE 512
 
-uint8_t buf[BUFSIZE];
-uint16_t buflen;
+static uint8_t buf[BUFSIZE];
+static uint16_t buflen;
 
 void reset()
 {

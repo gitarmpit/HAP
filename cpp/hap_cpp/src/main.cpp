@@ -10,6 +10,7 @@ void advertise2();
 #include "http_reply.h"
 #include "http_server.h"
 #include "common.h"
+#include "srp.h"
 
 static void test_http()
 {
@@ -133,6 +134,8 @@ static void test_crypto()
     }
 
 }
+
+
 
 int main(void)
 {

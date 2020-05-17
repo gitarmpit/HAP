@@ -6,9 +6,10 @@
 class PairSetup
 {
 public:
-    static HttpReply step1();
-    static HttpReply step3(const buf& message, const buf& authData);
-    static HttpReply step2(const buf& ios_SRP_public_key, const buf& ios_SRP_proof);
+	void setup();
+    HttpReply step1();
+    HttpReply step3(const buf& message, const buf& authData);
+    HttpReply step2(const buf& ios_SRP_public_key, const buf& ios_SRP_proof);
 };
 
 

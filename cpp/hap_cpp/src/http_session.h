@@ -8,6 +8,7 @@
 #include "http_request.h"
 #include "http_reply.h"
 #include "session_crypto.h"
+#include "pair_setup.h"
 
 class HttpSession 
 {
@@ -17,6 +18,7 @@ private:
     int  clientSocket;
     bool pairingComplete;
     SessionCrypto crypto;
+    PairSetup pairSetup;
 
     bool waitForIncomingReq(timeval* tv, uint8_t*& msg, int& msg_size);
     HttpReply processRequest (const HttpRequest& req);
