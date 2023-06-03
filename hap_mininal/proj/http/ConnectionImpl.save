@@ -1,0 +1,39 @@
+package http;
+
+import java.io.IOException;
+
+//dummy implementation of the real ConnectionImpl
+public class ConnectionImpl implements HomekitClientConnection 
+{
+
+	@Override
+	public HttpResponse handleRequest(HttpRequest request) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public byte[] decryptRequest(byte[] ciphertext) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public byte[] encryptResponse(byte[] plaintext) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void outOfBand(HttpResponse message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
