@@ -1,0 +1,184 @@
+package main;
+
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
+
+import bouncy.HKDFBytesGenerator;
+import bouncy.HKDFParameters;
+import bouncy.SHA512Digest;
+import crypto.ChachaDecoder;
+import crypto.ChachaEncoder;
+import crypto.Curve25519;
+import crypto.EdsaSigner;
+import crypto.EdsaVerifier;
+
+public class PairVerify
+{
+
+    private static volatile SecureRandom secureRandom;
+
+    private final AuthInfo authInfo;
+
+    private byte[] hkdfKey;
+    private byte[] clientPublicKey;
+    private byte[] publicKey;
+    private byte[] sharedSecret;
+
+    private byte[] longtermKeyWrite;
+    private byte[] longermKeyRead;
+
+    private String label;
+
+    public PairVerify(AuthInfo authInfo)
+    {
+        this.authInfo = authInfo;
+        label = "Home Bridge";
+    }
+
+    public byte[] stage1(byte[] pk) throws Exception
+    {
+        System.out.println("Starting pair verification for " + label);
+        clientPublicKey = pk; // request.getClientPublicKey();
+        publicKey = new byte[32];
+        //byte[] privateKey = new byte[32];
+        byte[] privateKey = { -27, 126, 121, -98, -24, -32, -44, -85, 120, 3, 21, 66, 125, 101, 36, -91, -14, 75, 12, 95, -39, 115, -48, -8, -46, 15, 7, 57, 73, 53, 58, 110 };
+        //getSecureRandom().nextBytes(privateKey);
+//        System.out.println ("ver1 key:");
+//        for (int i = 0; i < privateKey.length; ++i)
+//        {
+//            System.out.printf ("%d, ", privateKey[i]);
+//        }
+//        System.out.println();
+        
+        Curve25519.keygen(publicKey, null, privateKey);
+
+        sharedSecret = new byte[32];
+        Curve25519.curve(sharedSecret, privateKey, clientPublicKey);
+
+        byte[] material = PairSetup.joinBytes(publicKey, authInfo.getMac().getBytes(StandardCharsets.UTF_8),
+                clientPublicKey);
+
+        byte[] proof = new EdsaSigner(authInfo.getPrivateKey()).sign(material);
+
+        HKDFBytesGenerator hkdf = new HKDFBytesGenerator(new SHA512Digest());
+        hkdf.init(new HKDFParameters(sharedSecret, "Pair-Verify-Encrypt-Salt".getBytes(StandardCharsets.UTF_8),
+                "Pair-Verify-Encrypt-Info".getBytes(StandardCharsets.UTF_8)));
+        hkdfKey = new byte[32];
+        hkdf.generateBytes(hkdfKey, 0, 32);
+
+        Encoder encoder = new Encoder();
+        encoder.add(MessageType.USERNAME, authInfo.getMac().getBytes(StandardCharsets.UTF_8));
+        encoder.add(MessageType.SIGNATURE, proof);
+        byte[] plaintext = encoder.toByteArray();
+
+        ChachaEncoder chacha = new ChachaEncoder(hkdfKey, "PV-Msg02".getBytes(StandardCharsets.UTF_8));
+        byte[] ciphertext = chacha.encodeCiphertext(plaintext);
+
+        encoder = new Encoder();
+        encoder.add(MessageType.STATE, (short) 2);
+        encoder.add(MessageType.ENCRYPTED_DATA, ciphertext);
+        encoder.add(MessageType.PUBLIC_KEY, publicKey);
+        // return new PairingResponse(encoder.toByteArray());
+        return encoder.toByteArray();
+    }
+
+    public byte[] stage2(byte[] t5) throws Exception
+    {
+
+        byte[] authData = new byte[16];
+        byte[] message = new byte[t5.length - 16];
+        for (int i = 0; i < 16; ++i)
+        {
+            authData[i] = t5[message.length + i];
+        }
+        for (int i = 0; i < message.length; ++i)
+        {
+            message[i] = t5[i];
+        }
+
+            System.out.println("message");
+            for (int i = 0; i < message.length; ++i) 
+            {
+                System.out.printf ("%x ", message[i]);
+            }
+            System.out.println();
+
+
+            System.out.println("Auth data");
+            for (int i = 0; i < authData.length; ++i) 
+            {
+                System.out.printf ("%x ", authData[i]);
+            }
+            System.out.println();
+
+
+
+
+        ChachaDecoder chacha = new ChachaDecoder(hkdfKey, "PV-Msg03".getBytes(StandardCharsets.UTF_8));
+        byte[] plaintext;
+        try
+        {
+            plaintext = chacha.decodeCiphertext(authData, message);
+        } catch (Exception ex)
+        {
+            throw new Exception("verify M3: chacha decode error");
+        }
+
+        Decoder d = new Decoder();
+        d.decode(plaintext);
+        byte[] clientUsername = d.getData(MessageType.USERNAME.getKey());
+        byte[] clientSignature = d.getData(MessageType.SIGNATURE.getKey());
+
+        byte[] material = PairSetup.joinBytes(clientPublicKey, clientUsername, publicKey);
+
+        byte[] clientLtpk = authInfo.getUserPublicKey(authInfo.getMac()
+                + new String(clientUsername, StandardCharsets.UTF_8));
+        if (clientLtpk == null)
+        {
+            throw new Exception("Unknown user: " + new String(clientUsername, StandardCharsets.UTF_8));
+        }
+
+        Encoder encoder = new Encoder();
+        if (new EdsaVerifier(clientLtpk).verify(material, clientSignature))
+        {
+            encoder.add(MessageType.STATE, (short) 4);
+            System.out.println("Completed pair verification for " + label);
+            longtermKeyWrite = createKey("Control-Write-Encryption-Key");
+            longermKeyRead = createKey("Control-Read-Encryption-Key");
+            authInfo.storeReadKey(longermKeyRead);
+            authInfo.storeWriteKey(longtermKeyWrite);
+            return encoder.toByteArray();
+        } else
+        {
+            encoder.add(MessageType.ERROR, (short) 4);
+            System.out.println("Invalid signature. Could not pair " + label);
+            return new byte[0];
+        }
+    }
+
+    private byte[] createKey(String info)
+    {
+        HKDFBytesGenerator hkdf = new HKDFBytesGenerator(new SHA512Digest());
+        hkdf.init(new HKDFParameters(sharedSecret, "Control-Salt".getBytes(StandardCharsets.UTF_8), info
+                .getBytes(StandardCharsets.UTF_8)));
+        byte[] key = new byte[32];
+        hkdf.generateBytes(key, 0, 32);
+        return key;
+    }
+
+    private static SecureRandom getSecureRandom()
+    {
+        if (secureRandom == null)
+        {
+            synchronized (PairVerify.class)
+            {
+                if (secureRandom == null)
+                {
+                    secureRandom = new SecureRandom();
+                }
+            }
+        }
+        return secureRandom;
+    }
+
+}

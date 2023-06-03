@@ -1,0 +1,50 @@
+##
+## Espressif ESP32 Partition Table
+##
+## For Homekit
+##
+## Version 1.0
+##
+## Size:      4MB
+##
+## Offset:    52K
+##
+## ota_data    8 K
+## phy         4 K   =    64 K
+## factory  3192 K   
+## nsv_key:    4 K
+## nsv:       32 K
+## ============================
+##               K
+
+
+## Available: 4194304		=> 6144
+
+## Name,    Type,       SubType,    Offset,     Size,   Flags
+
+## Offset:      0xD000   == 0000D000       =   53248    == 52K
+
+##
+## PHY INIT
+## Name,    Type,       SubType,    Offset,     Size,   Flags
+phy_init, 	data, 		phy,        0xF000,     4K
+
+##
+## Factory 
+##
+## Name,    Type,       SubType,    Offset,     Size,   Flags
+factory,    app,        factory,    0x10000,    3192K,
+
+##
+## NVS Keys (Preferences Keys)
+##
+## Needed for Preferences 
+## Name,    Type,       SubType,    Offset,     Size,   Flags
+nvs_key,    data,       nvs_keys,   ,           4K,
+
+##
+## NVS (Preferences)
+##
+## Name,    Type,       SubType,    Offset,     Size,   Flags
+nvs,        data,       nvs,        ,           32K,
+

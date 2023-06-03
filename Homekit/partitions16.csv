@@ -1,0 +1,69 @@
+##
+## Espressif ESP32 Partition Table
+##
+## For Homekit
+##
+## Version 1.0
+##
+##
+## Size:     16MB
+##
+## Offset:    52K
+##
+## ota_data    8 K
+## phy         4 K   =    64 K
+## ota 1    6384 K   
+## ota 2    6384 K   = 12768 K
+## nsv_key:    4 K
+## nsv:       32 K
+## SPIFFS:  2048 K   =  2084 K
+## ============================
+##         14916 K
+
+
+##
+## Name,    Type,       SubType,    Offset,     Size,   Flags
+
+## Offset:      0xD000   == 0000D000       =   53248    == 52K
+
+##
+## OTA data
+## required for OTA
+## Name,    Type,       SubType,    Offset,     Size,   Flags
+otadata,    data, 		ota,        0xD000,  	8K
+
+## Offset:      0xD000   == 0000D000       =   53248 + 8K      = 61440     == 0000F000     =>  0xF000
+
+##
+## PHY INIT
+## Name,    Type,       SubType,    Offset,     Size,   Flags
+phy_init, 	data, 		phy,        0xF000,     4K
+
+## Offset:    0xF000   == 0000F000       =   61440 + 4K      = 65536      == 00010000     =>  0x10000
+
+##
+## 16MB
+##
+ota_0,      app,        ota_0,      0x10000,    6384K,
+ota_1,      app,        ota_1,      ,           6384K,
+
+##
+## NVS Keys (Preferences Keys)
+##
+## Needed for Preferences 
+## Name,    Type,       SubType,    Offset,     Size,   Flags
+nvs_key,    data,       nvs_keys,   ,           4K,
+
+##
+## NVS (Preferences)
+##
+## 
+## Name,    Type,       SubType,    Offset,     Size,   Flags
+nvs,        data,       nvs,        ,           32K,
+
+
+##
+## SPIFFS
+## Name,    Type,       SubType,    Offset,     Size,   Flags
+spiffs,     data,       spiffs,     ,           2048K,
+
